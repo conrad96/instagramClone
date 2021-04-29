@@ -1,6 +1,6 @@
-.App
+.app
 {
-    background-color: white;
+    background-color: white;    
 }
 
 .app__header
@@ -9,9 +9,21 @@
     object-fit: contain;
     padding: 20px;
     border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
 }
 
 .app__headerImage
 {
     height: 45px;
+}
+
+.app__btns
+{
+    position: relative;
+    float: right;
+}
+
+.app__btns > button 
+{
+    margin: 8px;
 }

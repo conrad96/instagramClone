@@ -2,7 +2,8 @@ import React from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import './Post.css';
 
-function Post({username, caption, imageUrl}) {
+function Post({username, caption, imageUrl}) 
+{
     return (
         <div className="post">
             <div className="post__header">
