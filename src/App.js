@@ -14,12 +14,33 @@ function App()
   
   const [open, setOpen] = useState(false);
 
+  let [email, password, username] = '';
+
+  function rand() 
+  {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+  function getModalStyle() 
+  {
+    const top = 50;
+    const left = 50;
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }  
+
+  const [modalStyle] = useState(getModalStyle);
+
   const useStyles = makeStyles((theme) => ({
     paper: {
       position: 'absolute',
       width: 400,
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
+      border: '2px solid red',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
@@ -45,15 +66,46 @@ function App()
       }) ));
     })
   }, [])
+
+  function setEmail(value)
+  {
+    email = value;
+  }
+
+  function setUsername(value)
+  {
+    username = value;
+  }
+
+  function setPassword(value)
+  {
+    password = value
+  }
+
+  function handleLogin()
+  {
+    return '';
+  }
+
+  const signup = (event) =>
+  {
+    event.preventDefault();
+    
+  }
   
   return (
     <div className="app">
       <Modal open={open} onClose={handleClose} >
-        <div className={classes.paper}>
+        <div style={modalStyle} className={classes.paper}>
           <h2 id="simple-modal-title">Signup</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>        
+          <br />
+          <img src={Logo} className="app__headerImage" />
+          <form className="app__signup">            
+            <input placeholder="Username" type="text" value={username} onChange={(event)=> setUsername(event.target.value)} />
+            <input placeholder="Email" type="email" value={email} onChange={(event)=> setEmail(event.target.value)} />
+            <input placeholder="Password" type="password" value={password} onChange={(event)=> setPassword(event.target.value)} />
+            <button type="submit" className="app__loginBtn" onClick={handleLogin} >Signup</button>
+          </form>
         </div>
       </Modal>
 
