@@ -2,7 +2,7 @@ import './App.css'
 import Post from './Post'
 import Logo from './assets/images/header.png'
 import React, {useState, useEffect} from 'react'
-import {db} from './Firebase'
+import {auth, db} from './Firebase'
 import {PersonAdd, ExitToApp} from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -14,7 +14,9 @@ function App()
   
   const [open, setOpen] = useState(false);
 
-  let [email, password, username] = '';
+  let [email, password, username] = useState('');
+
+  const setUser = useState(null);
 
   function rand() 
   {
@@ -67,6 +69,19 @@ function App()
     })
   }, [])
 
+  useEffect(()=> {
+    auth.onAuthStateChanged((authuser)=> {
+      if(authuser)
+      {
+        //user logged in
+        setUser(authuser);
+      }else {
+        //user logged out
+        setUser(null);
+      }
+    })
+  }, [])
+
   function setEmail(value)
   {
     email = value;
@@ -90,7 +105,8 @@ function App()
   const signup = (event) =>
   {
     event.preventDefault();
-    
+    //authentication
+    auth.createUserWithEmailAndPassword(email, password).catch((error)=> alert(error.message));
   }
   
   return (
