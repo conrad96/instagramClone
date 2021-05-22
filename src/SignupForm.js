@@ -24,9 +24,11 @@ function SignupForm()
         //onClick={(event)=> signup(event)}
         <div className="signup__form">
             <form className={classes.root}>
-                <h2 id="simple-modal-title">
-                    <img src={Logo} className="signup__headerImage" />
-                </h2>
+                <div className="signup__headerSection">
+                    <div className="signup__headerImageSection">
+                        <img src={Logo} className="signup__headerImage" />
+                    </div>
+                </div>
                 <div className="signup__formField">
                     <TextField id="username" name="username" label="Username" />
                 </div>
