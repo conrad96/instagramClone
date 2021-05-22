@@ -1,0 +1,18 @@
+.signup__headerImage
+{
+    height: 45px;
+}
+
+.signup__form
+{
+    margin: auto;
+    width: 50%;
+}
+.signup__formField
+{    
+    padding: 5px;
+}
+.signup__formField button
+{
+    width: 100%;
+}
