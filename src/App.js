@@ -6,7 +6,7 @@ import {auth, db} from './Firebase'
 import {PersonAdd, ExitToApp, Unsubscribe} from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-
+import SignupForm from './SignupForm';
 
 function App() 
 {
@@ -44,11 +44,13 @@ function App()
       position: 'absolute',
       width: 400,
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid lightgray',
+      border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
   }));
+
+  const classesModal = useStyles();
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,8 +59,6 @@ function App()
   const handleClose = () => {
     setOpen(false);
   };
-
-  const classes = useStyles();
 
   //useEffect runs a piece of code based on a specific condition
   useEffect(()=> {
@@ -127,16 +127,8 @@ function App()
   return (
     <div className="app">
       <Modal open={open} onClose={handleClose} >
-        <div style={modalStyle} className={classes.paper}>                    
-          <form className="app__signup">
-            <h2 id="simple-modal-title">
-              <img src={Logo} className="app__headerImage" />
-            </h2>
-            <input placeholder="Username" type="text" onChange={(event)=> setUsername(event.target.value)} />
-            <input placeholder="Email" type="email" onChange={(event)=> setEmail(event.target.value)} />
-            <input placeholder="Password" type="password" onChange={(event)=> setPassword(event.target.value)} />
-            <button type="submit" className="app__signupBtn" onClick={(event)=> signup(event)} >Signup</button>
-          </form>
+        <div style={modalStyle} className={classesModal.paper}>
+          //
         </div>
       </Modal>
 
@@ -147,18 +139,18 @@ function App()
           <button title="Login"><ExitToApp>Login</ExitToApp></button>
         </div>
       </div>      
-      
+      <SignupForm />
       <div className="app__postBody">
         {
-          posts.map(({id, post}) => {   
+          // posts.map(({id, post}) => {   
 
-            return(
-            <Post
-            key={id}
-            username={post.username} 
-            imageUrl={post.imageUrl} 
-            caption={post.caption} /> )
-          })
+          //   return(
+          //   <Post
+          //   key={id}
+          //   username={post.username} 
+          //   imageUrl={post.imageUrl} 
+          //   caption={post.caption} /> )
+          // })
         }
       </div>      
 
