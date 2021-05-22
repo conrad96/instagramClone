@@ -3,6 +3,12 @@
     background-color: white;    
 }
 
+.app__postBody
+{
+    margin: auto;
+    width: 50%;
+}
+
 .app__header
 {
     background-color: white;
