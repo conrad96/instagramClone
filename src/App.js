@@ -148,17 +148,19 @@ function App()
         </div>
       </div>      
       
-      {
-        posts.map(({id, post}) => {   
+      <div className="app__postBody">
+        {
+          posts.map(({id, post}) => {   
 
-          return(
-          <Post
-          key={id}
-          username={post.username} 
-          imageUrl={post.imageUrl} 
-          caption={post.caption} /> )
-        })
-      }
+            return(
+            <Post
+            key={id}
+            username={post.username} 
+            imageUrl={post.imageUrl} 
+            caption={post.caption} /> )
+          })
+        }
+      </div>      
 
       {/**comments */}
     </div>
