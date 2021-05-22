@@ -128,7 +128,7 @@ function App()
     <div className="app">
       <Modal open={open} onClose={handleClose} >
         <div style={modalStyle} className={classesModal.paper}>
-          //
+          <SignupForm />
         </div>
       </Modal>
 
@@ -139,18 +139,18 @@ function App()
           <button title="Login"><ExitToApp>Login</ExitToApp></button>
         </div>
       </div>      
-      <SignupForm />
+      
       <div className="app__postBody">
         {
-          // posts.map(({id, post}) => {   
+          posts.map(({id, post}) => {   
 
-          //   return(
-          //   <Post
-          //   key={id}
-          //   username={post.username} 
-          //   imageUrl={post.imageUrl} 
-          //   caption={post.caption} /> )
-          // })
+            return(
+            <Post
+            key={id}
+            username={post.username} 
+            imageUrl={post.imageUrl} 
+            caption={post.caption} /> )
+          })
         }
       </div>      
 
