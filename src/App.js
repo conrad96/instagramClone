@@ -14,12 +14,6 @@ function App()
   
   const [open, setOpen] = useState(false);
 
-  let email = '';
-  let password = '';
-  let username = '';
-
-  const [user, setUser] = useState(null);
-
   function rand() 
   {
     return Math.round(Math.random() * 20) - 10;
@@ -69,60 +63,7 @@ function App()
         post: doc.data()
       }) ));
     })
-  }, [])
-
-  useEffect(()=> {
-    const unsubscribe = auth.onAuthStateChanged((authuser)=> {
-      if(authuser)
-      {
-        //user logged in
-        console.log(authuser);
-
-        setUser(authuser);      
-      }else {
-        //user logged out
-        setUser = null;
-      }
-
-      return ()=> {
-        //cleanup
-        unsubscribe();
-      }
-    })
-  }, [user, username])
-
-  function setEmail(value)
-  {
-    email = value;
-  }
-
-  function setUsername(value)
-  {
-    username = value;
-  }
-
-  function setPassword(value)
-  {
-    password = value;
-  }
-
-  function handleLogin(event)
-  {
-    event.preventDefault();
-  }
-
-  const signup = (event) =>
-  {
-    event.preventDefault();
-    //authentication
-    console.log(email);
-    console.log(password);
-    auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
-      authUser.user.updateProfile({
-        displayName: username
-      })
-    }).catch((error)=> alert(error.message));
-  }
+  }, [])     
   
   return (
     <div className="app">
