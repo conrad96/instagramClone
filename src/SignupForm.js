@@ -2,7 +2,9 @@ import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
 import Logo from './assets/images/header.png'
 import Button from '@material-ui/core/Button'
-import './SignupForm.css'
+import './SignupForm.css';
+import {db, auth} from './Firebase'
+import {react, useEffect} from 'react';
 
 function SignupForm()
 {
@@ -17,11 +19,42 @@ function SignupForm()
 
     const classes = useStyles();
 
+    //signup code
+    let [email, password, username, user] = '';
+
+    const signup = (event) =>
+    {
+        event.preventDefault();
+        //authentication        
+        auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
+        authUser.user.updateProfile({
+            displayName: username
+        })
+        }).catch((error)=> alert(error.message));
+    }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authuser)=> {
+          if(authuser)
+          {
+            //user logged in
+            console.log(authuser);
+    
+            //setUser(authuser);      
+          }else {
+            //user logged out
+            //setUser = null;
+          }
+    
+          return ()=> {
+            //cleanup
+            unsubscribe();
+          }
+        })
+    }, [user, username])
+
     return (
-        //onChange={(event)=> setUsername(event.target.value)}
-        //onChange={(event)=> setEmail(event.target.value)}
-        //onChange={(event)=> setPassword(event.target.value)}
-        //onClick={(event)=> signup(event)}
+        
         <div className="signup__form">
             <form className={classes.root}>
                 <div className="signup__headerSection">
