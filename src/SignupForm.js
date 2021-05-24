@@ -24,21 +24,27 @@ function SignupForm()
 
     const signup = (event) =>
     {
-        event.preventDefault();
-        //authentication        
+        event.preventDefault();   
+
+        username = document.getElementById('username').value;
+        email = document.getElementById('email').value;
+        password = document.getElementById('password').value;
+                
+        //authentication
         auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
-        authUser.user.updateProfile({
-            displayName: username
-        })
-        }).catch((error)=> alert(error.message));
+            console.log(authUser);
+
+            authUser.user.updateProfile({
+                displayName: username
+            })
+        }).catch((error)=> alert(error.message));        
     }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authuser)=> {
           if(authuser)
           {
-            //user logged in
-            console.log(authuser);
+            //user logged in            
     
             //setUser(authuser);      
           }else {
@@ -52,11 +58,12 @@ function SignupForm()
           }
         })
     }, [user, username])
+    
 
     return (
         
         <div className="signup__form">
-            <form className={classes.root}>
+            <form className={classes.root} id="signup__Form">
                 <div className="signup__headerSection">
                     <div className="signup__headerImageSection">
                         <img src={Logo} className="signup__headerImage" />
@@ -72,7 +79,7 @@ function SignupForm()
                     <TextField id="password" type="password" name="password" label="Password" />
                 </div>
                 <div className="signup__formField">
-                    <Button variant="contained" id="signup" color="primary">Signup</Button>
+                    <Button variant="contained" id="signup" color="primary" onClick={(event)=> signup(event)} >Signup</Button>
                 </div>                
             </form>
         </div>       
