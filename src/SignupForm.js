@@ -22,23 +22,24 @@ function SignupForm()
     //signup code
     let [email, password, username, user] = '';
 
-    const signup = (event) =>
+    let form = document.querySelector('#signupForm');    
+
+    if(form != null)
     {
-        event.preventDefault();   
-
-        username = document.getElementById('username').value;
-        email = document.getElementById('email').value;
-        password = document.getElementById('password').value;
-                
-        //authentication
-        auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
-            console.log(authUser);
-
-            authUser.user.updateProfile({
-                displayName: username
-            })
-        }).catch((error)=> alert(error.message));        
-    }
+        console.log(form);
+        
+        form.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+            alert('submited');
+            // auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
+            //     console.log(authUser);
+    
+            //     authUser.user.updateProfile({
+            //         displayName: username
+            //     })
+            // }).catch((error)=> alert(error.message));
+        })
+    }    
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authuser)=> {
@@ -63,7 +64,7 @@ function SignupForm()
     return (
         
         <div className="signup__form">
-            <form className={classes.root} id="signup__Form">
+            <form className={classes.root} id="signupForm">
                 <div className="signup__headerSection">
                     <div className="signup__headerImageSection">
                         <img src={Logo} className="signup__headerImage" />
@@ -79,7 +80,7 @@ function SignupForm()
                     <TextField id="password" type="password" name="password" label="Password" />
                 </div>
                 <div className="signup__formField">
-                    <Button variant="contained" id="signup" color="primary" onClick={(event)=> signup(event)} >Signup</Button>
+                    <Button variant="contained" id="signup" color="primary">Signup</Button>
                 </div>                
             </form>
         </div>       
