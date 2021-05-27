@@ -20,26 +20,27 @@ function SignupForm()
     const classes = useStyles();
 
     //signup code
-    let [email, password, username, user] = '';
-
-    let form = document.querySelector('#signupForm');    
-
-    if(form != null)
-    {
-        console.log(form);
-        
-        form.addEventListener('submit', function(evt) {
-            evt.preventDefault();
-            alert('submited');
-            // auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {
-            //     console.log(authUser);
+    let [email, password, username, user] = '';    
     
-            //     authUser.user.updateProfile({
-            //         displayName: username
-            //     })
-            // }).catch((error)=> alert(error.message));
-        })
-    }    
+    const signup = (evt)=>
+    {
+        evt.preventDefault();
+
+        username = evt.target[0].value;
+        email = evt.target[1].value;
+        password = evt.target[2].value;
+
+        auth.createUserWithEmailAndPassword(email, password).then((authUser)=> {                        
+            
+            authUser.user.updateProfile({
+                displayName: username
+            })
+            alert('Account created successfully');
+
+            window.location.reload();
+            
+        }).catch((error)=> alert(error.message));
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authuser)=> {
@@ -64,7 +65,7 @@ function SignupForm()
     return (
         
         <div className="signup__form">
-            <form className={classes.root} id="signupForm">
+            <form className={classes.root} id="signupForm" onSubmit={signup}>
                 <div className="signup__headerSection">
                     <div className="signup__headerImageSection">
                         <img src={Logo} className="signup__headerImage" />
@@ -80,7 +81,7 @@ function SignupForm()
                     <TextField id="password" type="password" name="password" label="Password" />
                 </div>
                 <div className="signup__formField">
-                    <Button variant="contained" id="signup" color="primary">Signup</Button>
+                    <Button type="submit" variant="contained" id="signup" color="primary">Signup</Button>
                 </div>                
             </form>
         </div>       
